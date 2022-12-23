@@ -1,6 +1,5 @@
 package com.example.usermanagementsystem.dto.request;
 
-import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.model.Status;
 import java.time.LocalDate;
 
@@ -9,7 +8,6 @@ public class UserAccountRequestDto {
     private String password;
     private String firstName;
     private String lastName;
-    private Role role;
     private Status status;
     private LocalDate createdAt;
 
@@ -27,10 +25,6 @@ public class UserAccountRequestDto {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public Role getRole() {
-        return role;
     }
 
     public Status getStatus() {

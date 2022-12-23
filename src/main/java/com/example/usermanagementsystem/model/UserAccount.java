@@ -3,6 +3,7 @@ package com.example.usermanagementsystem.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,11 +15,19 @@ public class UserAccount {
     private String password;
     private String firstName;
     private String lastName;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    private Set<Role> roles;
     @Enumerated(EnumType.STRING)
     private Status status;
     private LocalDate createdAt;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -58,14 +67,6 @@ public class UserAccount {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public Status getStatus() {

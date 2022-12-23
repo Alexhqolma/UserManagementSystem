@@ -1,12 +1,34 @@
 package com.example.usermanagementsystem.model;
 
-public enum Role {
-    USER("User"),
-    ADMIN("Admin");
+import jakarta.persistence.*;
 
-    private final String value;
+@Entity
+@Table(name = "roles")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Enumerated(EnumType.STRING)
+    private RoleName role;
 
-    Role(String value) {
-        this.value = value;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public RoleName getRoleName() {
+        return role;
+    }
+
+    public enum RoleName {
+        ADMIN,
+        USER
+    }
+
+    public void setRoleName(RoleName role) {
+        this.role = role;
     }
 }

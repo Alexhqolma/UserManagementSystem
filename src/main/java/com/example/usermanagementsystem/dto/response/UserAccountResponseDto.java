@@ -1,6 +1,5 @@
 package com.example.usermanagementsystem.dto.response;
 
-import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.model.Status;
 import java.time.LocalDate;
 
@@ -10,7 +9,6 @@ public class UserAccountResponseDto {
     private String password;
     private String firstName;
     private String lastName;
-    private Role role;
     private Status status;
     private LocalDate createdAt;
 
@@ -52,14 +50,6 @@ public class UserAccountResponseDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public Status getStatus() {
