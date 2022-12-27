@@ -3,15 +3,19 @@ package com.example.usermanagementsystem.service.impl;
 import com.example.usermanagementsystem.model.UserAccount;
 import com.example.usermanagementsystem.repository.UserAccountRepository;
 import com.example.usermanagementsystem.service.UserAccountService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
     private final UserAccountRepository userAccountRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserAccountServiceImpl(UserAccountRepository userAccountRepository) {
+    public UserAccountServiceImpl(UserAccountRepository userAccountRepository,
+                                  PasswordEncoder passwordEncoder) {
         this.userAccountRepository = userAccountRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -21,6 +25,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount save(UserAccount userAccount) {
+        userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
         return userAccountRepository.save(userAccount);
     }
 }
