@@ -2,6 +2,7 @@ package com.example.usermanagementsystem.dto.response;
 
 import com.example.usermanagementsystem.model.Status;
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserAccountResponseDto {
     private Long id;
@@ -11,6 +12,15 @@ public class UserAccountResponseDto {
     private String lastName;
     private Status status;
     private LocalDate createdAt;
+    private List<RoleResponseDto> role;
+
+    public List<RoleResponseDto> getRole() {
+        return role;
+    }
+
+    public void setRole(List<RoleResponseDto> role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;

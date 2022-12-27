@@ -18,4 +18,9 @@ public class UserAccountServiceImpl implements UserAccountService {
     public Optional<UserAccount> findByUsername(String userName) {
         return userAccountRepository.findByUserName(userName);
     }
+
+    @Override
+    public UserAccount save(UserAccount userAccount) {
+        return userAccountRepository.save(userAccount);
+    }
 }

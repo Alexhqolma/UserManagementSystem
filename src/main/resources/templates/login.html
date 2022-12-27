@@ -1,0 +1,8 @@
+<header th:insert="main/header :: header"></header>
+<h1>Authorization</h1>
+<form th:action="@{/login}" method="post">
+  <input type="text" placeholder="User Name" name="username" />
+  <input type="password" placeholder="Password" name="password" />
+  <input type="submit" value="Login" />
+</form>
+<footer th:insert="main/footer :: footer"></footer>

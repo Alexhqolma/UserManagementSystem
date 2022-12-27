@@ -1,7 +1,6 @@
 package com.example.usermanagementsystem.model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 

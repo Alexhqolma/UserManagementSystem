@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
@@ -10,6 +10,13 @@ public class Role {
     private Long id;
     @Enumerated(EnumType.STRING)
     private RoleName role;
+
+    public Role() {
+    }
+
+    public Role(RoleName role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
