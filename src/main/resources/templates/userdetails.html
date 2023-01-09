@@ -1,0 +1,11 @@
+<header th:insert="main/header :: header"></header>
+<h1>User Details</h1>
+<div th:each="det : ${user}">
+  <div> User Id: <span th:text="${det.id}" /></div>
+  <div> User Name: <span th:text="${det.userName}" /></div>
+  <div> First Name: <span th:text="${det.firstName}" /></div>
+  <div> Last Name: <span th:text="${det.lastName}" /></div>
+  <div> Last Name: <span th:text="${det.status}" /></div>
+  <div> Date of creation: <span th:text="${det.createdAt}" /></div>
+</div>
+<footer th:insert="main/footer :: footer"></footer>

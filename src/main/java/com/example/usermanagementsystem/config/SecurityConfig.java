@@ -1,20 +1,17 @@
 package com.example.usermanagementsystem.config;
 
 import com.example.usermanagementsystem.model.Role;
+import com.example.usermanagementsystem.security.filter.UserStatusFilter;
 import com.example.usermanagementsystem.security.jwt.JwtConfigurer;
 import com.example.usermanagementsystem.security.jwt.JwtTokenProvider;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -37,21 +34,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
-                .sessionManagement()
+                /*.sessionManagement()
                 .enableSessionUrlRewriting(true)
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .and()*/
                 .authorizeRequests()
-                .antMatchers("/login", "/inject", "/")
+                .antMatchers("/", "/inject")
                 .permitAll()
-                .antMatchers("/users").hasRole(Role.RoleName.ADMIN.name())
-                //.antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
-                //.antMatchers("/users").hasRole("ADMIN")
+                .antMatchers("/users", "/users/{id}", "/users/{id}", "/users/new", "/users/{id}/edit")
+                .hasRole(Role.RoleName.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/**").hasRole(Role.RoleName.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
+                .addFilterAfter(new UserStatusFilter(), BasicAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()

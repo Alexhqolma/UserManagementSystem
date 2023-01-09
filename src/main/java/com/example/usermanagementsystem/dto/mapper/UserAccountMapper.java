@@ -5,7 +5,6 @@ import com.example.usermanagementsystem.dto.response.RoleResponseDto;
 import com.example.usermanagementsystem.dto.response.UserAccountResponseDto;
 import com.example.usermanagementsystem.model.UserAccount;
 import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +39,7 @@ public class UserAccountMapper {
                 .collect(Collectors.toList());
         userAccountResponseDto.setRole(roles);
         userAccountResponseDto.setStatus(userAccount.getStatus());
+        userAccountResponseDto.setCreatedAt(userAccount.getCreatedAt());
         return userAccountResponseDto;
     }
 }

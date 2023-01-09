@@ -4,7 +4,6 @@ import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.repository.RoleRepository;
 import com.example.usermanagementsystem.service.RoleService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -23,5 +22,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Role findByRole(Role.RoleName role) {
+        return roleRepository.findByRole(role);
     }
 }

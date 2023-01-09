@@ -7,8 +7,10 @@ import com.example.usermanagementsystem.service.UserAccountService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/inject")
@@ -23,23 +25,35 @@ public class InjectController {
     }
 
     @GetMapping
-    public String injectData() {
-        List<Role> roles = roleService.findAll();
+    public ModelAndView injectData() {
+        /*List<Role> roles = roleService.findAll();
         if (!roles.isEmpty()) {
             return "Injection was completed";
-        }
+        }*/
         // Save roles
         roleService.save(new Role(Role.RoleName.ADMIN));
         roleService.save(new Role(Role.RoleName.USER));
-        roles = roleService.findAll();
+        List<Role> roles = roleService.findAll();
+        Role role = roleService.findByRole(Role.RoleName.USER);
+        Set<Role> roleUser = new HashSet<>();
+        roleUser.add(role);
 
-        // save user
+        // save users
         UserAccount testAdmin = new UserAccount();
-        testAdmin.setUserName("admin");
-        testAdmin.setPassword("1234");
+        testAdmin.setUserName("a");
+        testAdmin.setPassword("a");
         testAdmin.setRoles(new HashSet<>(roles));
         userAccountService.save(testAdmin);
 
-        return "Done!";
+        /*UserAccount testUser = new UserAccount();
+        testUser.setUserName("User");
+        testUser.setPassword("a");
+        testUser.setRoles(roleUser);
+        userAccountService.save(testUser);*/
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/inject");
+
+        return modelAndView;
     }
 }
