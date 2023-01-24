@@ -17,16 +17,6 @@ public class UserAccountMapper {
         this.roleMapper = roleMapper;
     }
 
-    public UserAccount mapToModel(UserAccountRequestDto dto) {
-        UserAccount userAccount = new UserAccount();
-        userAccount.setUserName(dto.getUserName());
-        userAccount.setPassword(dto.getPassword());
-        userAccount.setFirstName(dto.getFirstName());
-        userAccount.setLastName(dto.getLastName());
-        userAccount.setRoles(new HashSet<>());
-        return userAccount;
-    }
-
     public UserAccountResponseDto mapToDto(UserAccount userAccount) {
         UserAccountResponseDto userAccountResponseDto = new UserAccountResponseDto();
         userAccountResponseDto.setId(userAccount.getId());

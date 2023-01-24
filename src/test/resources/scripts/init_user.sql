@@ -1,0 +1,1 @@
+INSERT INTO user_accounts (username) VALUES ("User");

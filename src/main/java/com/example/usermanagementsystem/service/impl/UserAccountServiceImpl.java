@@ -35,7 +35,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         return userAccountRepository.findAll();
     }
 
+    @Override
     public UserAccount findById(Long id) {
-        return userAccountRepository.findById(id).get();
+        return userAccountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Can't find user by id " + id));
     }
 }

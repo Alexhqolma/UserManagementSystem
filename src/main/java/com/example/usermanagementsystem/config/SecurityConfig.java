@@ -34,12 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
-                /*.sessionManagement()
-                .enableSessionUrlRewriting(true)
-                .and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()*/
                 .authorizeRequests()
                 .antMatchers("/", "/inject")
                 .permitAll()

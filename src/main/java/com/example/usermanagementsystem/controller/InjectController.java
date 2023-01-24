@@ -26,11 +26,6 @@ public class InjectController {
 
     @GetMapping
     public ModelAndView injectData() {
-        /*List<Role> roles = roleService.findAll();
-        if (!roles.isEmpty()) {
-            return "Injection was completed";
-        }*/
-        // Save roles
         roleService.save(new Role(Role.RoleName.ADMIN));
         roleService.save(new Role(Role.RoleName.USER));
         List<Role> roles = roleService.findAll();
@@ -38,18 +33,11 @@ public class InjectController {
         Set<Role> roleUser = new HashSet<>();
         roleUser.add(role);
 
-        // save users
         UserAccount testAdmin = new UserAccount();
         testAdmin.setUserName("a");
         testAdmin.setPassword("a");
         testAdmin.setRoles(new HashSet<>(roles));
         userAccountService.save(testAdmin);
-
-        /*UserAccount testUser = new UserAccount();
-        testUser.setUserName("User");
-        testUser.setPassword("a");
-        testUser.setRoles(roleUser);
-        userAccountService.save(testUser);*/
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/inject");

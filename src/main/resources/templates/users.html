@@ -1,6 +1,6 @@
 <header th:insert="main/header :: header"></header>
 <h1>Users</h1>
-<div th:each="row : ${allusers}">
+<div th:each="row : ${allUsers}">
     <div> User Id: <span th:text="${row.id}" /></div>
     <div> User Name: <span th:text="${row.userName}" /></div>
     <div> First Name: <span th:text="${row.firstName}" /></div>

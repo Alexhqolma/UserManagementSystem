@@ -1,5 +1,8 @@
 package com.example.usermanagementsystem.model;
 
+import com.example.usermanagementsystem.validation.Latin;
+import com.example.usermanagementsystem.validation.LatinWithDigits;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,18 +11,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_accounts")
 public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 3, max = 16)
+    @Latin
     private String userName;
+    @Size(min = 3, max = 16)
+    @LatinWithDigits
     private String password;
+    @Size(min = 1, max = 16)
+    @Latin
     private String firstName;
+    @Size(min = 1, max = 16)
+    @Latin
     private String lastName;
     @ManyToMany
     private Set<Role> roles;

@@ -20,8 +20,7 @@ import java.util.List;
 
 @Component
 public class JwtTokenProvider {
-    public static final int TOKEN_SUBSTR = 7;
-
+    public static final int START_INDEX_OF_TOKEN = 7;
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey;
     @Value("${security.jwt.token.expire-length:3600000}")
@@ -63,7 +62,7 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(TOKEN_SUBSTR);
+            return bearerToken.substring(START_INDEX_OF_TOKEN);
         }
         return null;
     }

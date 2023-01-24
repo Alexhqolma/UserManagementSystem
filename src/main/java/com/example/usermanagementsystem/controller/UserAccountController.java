@@ -31,35 +31,35 @@ public class UserAccountController {
     }
 
     @GetMapping
-    public ModelAndView userMain() {
+    public ModelAndView getAllUsersPage() {
         ModelAndView modelAndView = new ModelAndView();
-        List<UserAccountResponseDto> list = userAccountService.findAll().stream()
+        List<UserAccountResponseDto> dtos = userAccountService.findAll().stream()
                 .map(userAccountMapper::mapToDto)
                 .collect(Collectors.toList());
         modelAndView.setViewName("/users");
-        modelAndView.addObject("allusers", list);
+        modelAndView.addObject("allUsers", dtos);
         return modelAndView;
     }
 
     @GetMapping("/{id}")
-    public ModelAndView userDetails(@PathVariable Long id) {
+    public ModelAndView getUserDetailsPage(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
         UserAccountResponseDto userAccountResponseDto =
                 userAccountMapper.mapToDto(userAccountService.findById(id));
-        modelAndView.setViewName("/userdetails");
+        modelAndView.setViewName("/userDetails");
         modelAndView.addObject("user", userAccountResponseDto);
         return modelAndView;
     }
 
     @GetMapping("/new")
-    public ModelAndView userNew() {
+    public ModelAndView getAddNewUserPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/usernew");
+        modelAndView.setViewName("addNewUser");
         return modelAndView;
     }
 
     @PostMapping("/new")
-    public ModelAndView userAdd(@RequestParam String userName,
+    public ModelAndView addUser(@RequestParam String userName,
                                 @RequestParam String userPassword,
                                 @RequestParam String firstName,
                                 @RequestParam String lastName,
@@ -78,22 +78,22 @@ public class UserAccountController {
         roles.add(userRole);
         userAccount.setRoles(roles);
         userAccountService.save(userAccount);
-        modelAndView.setViewName("/usernew");
+        modelAndView.setViewName("addNewUser");
         return modelAndView;
     }
 
     @GetMapping("/{id}/edit")
-    public ModelAndView userEdit(@PathVariable Long id) {
+    public ModelAndView getEditUserPage(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
         UserAccountResponseDto userAccountResponseDto =
                 userAccountMapper.mapToDto(userAccountService.findById(id));
-        modelAndView.setViewName("/useredit");
+        modelAndView.setViewName("/userEdit");
         modelAndView.addObject("user", userAccountResponseDto);
         return modelAndView;
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView userEdited(@PathVariable Long id,
+    public ModelAndView editUser(@PathVariable Long id,
                                    @RequestParam String userName,
                                    @RequestParam String userPassword,
                                    @RequestParam String firstName,
