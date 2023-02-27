@@ -21,7 +21,7 @@ public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 3, max = 16)
+    @Size(min = 3, max = 16, message = "Name should be between 3 and 16 characters")
     @Latin
     private String userName;
     @Size(min = 3, max = 16)

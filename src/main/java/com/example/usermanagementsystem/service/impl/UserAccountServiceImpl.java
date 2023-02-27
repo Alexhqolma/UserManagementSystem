@@ -5,6 +5,8 @@ import com.example.usermanagementsystem.repository.UserAccountRepository;
 import com.example.usermanagementsystem.service.UserAccountService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public UserAccount save(UserAccount userAccount) {
+    public UserAccount save( UserAccount userAccount) {
         userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
         return userAccountRepository.save(userAccount);
     }

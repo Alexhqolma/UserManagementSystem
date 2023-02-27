@@ -7,8 +7,12 @@ import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.UserAccount;
 import com.example.usermanagementsystem.service.RoleService;
 import com.example.usermanagementsystem.service.UserAccountService;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -52,39 +56,29 @@ public class UserAccountController {
     }
 
     @GetMapping("/new")
-    public ModelAndView getAddNewUserPage() {
+    public ModelAndView getAddNewUserPage(Model model) {
+        model.addAttribute("userAccount", new UserAccount());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addNewUser");
         return modelAndView;
     }
 
     @PostMapping("/new")
-    public ModelAndView addUser(@RequestParam String userName,
-                                @RequestParam String userPassword,
-                                @RequestParam String firstName,
-                                @RequestParam String lastName,
-                                @RequestParam int status,
-                                @RequestParam int role) {
+    public ModelAndView addUser(@ModelAttribute("userAccount") @Valid UserAccount userAccount,
+                                BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        UserAccount userAccount = new UserAccount();
-        userAccount.setUserName(userName);
-        userAccount.setPassword(userPassword);
-        userAccount.setFirstName(firstName);
-        userAccount.setLastName(lastName);
-        userAccount.setStatus(status == 0 ? Status.ACTIVE : Status.INACTIVE);
-        userAccount.setCreatedAt(LocalDate.now());
-        Set<Role> roles = new HashSet<>();
-        Role userRole = roleService.findByRole(role == 0 ? Role.RoleName.ADMIN : Role.RoleName.USER);
-        roles.add(userRole);
-        userAccount.setRoles(roles);
-        userAccountService.save(userAccount);
         modelAndView.setViewName("addNewUser");
+        if (bindingResult.hasErrors()) {
+            return modelAndView;
+        }
+        userAccountService.save(userAccount);
         return modelAndView;
     }
 
     @GetMapping("/{id}/edit")
-    public ModelAndView getEditUserPage(@PathVariable Long id) {
+    public ModelAndView getEditUserPage(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView();
+        model.addAttribute("userAccount", new UserAccount());
         UserAccountResponseDto userAccountResponseDto =
                 userAccountMapper.mapToDto(userAccountService.findById(id));
         modelAndView.setViewName("/userEdit");
@@ -93,20 +87,8 @@ public class UserAccountController {
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView editUser(@PathVariable Long id,
-                                   @RequestParam String userName,
-                                   @RequestParam String userPassword,
-                                   @RequestParam String firstName,
-                                   @RequestParam String lastName,
-                                   @RequestParam int status ) {
+    public ModelAndView editUser(@ModelAttribute("userAccount") UserAccount userAccount ) {
         ModelAndView modelAndView = new ModelAndView("redirect:/user");
-        UserAccount userAccount = new UserAccount();
-        userAccount.setId(id);
-        userAccount.setUserName(userName);
-        userAccount.setPassword(userPassword);
-        userAccount.setFirstName(firstName);
-        userAccount.setLastName(lastName);
-        userAccount.setStatus(status == 0 ? Status.ACTIVE : Status.INACTIVE);
         userAccountService.save(userAccount);
         return modelAndView;
     }

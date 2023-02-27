@@ -4,9 +4,6 @@ public class RoleResponseDto {
     private Long id;
     private String name;
 
-    public RoleResponseDto() {
-    }
-
     public Long getId() {
         return id;
     }

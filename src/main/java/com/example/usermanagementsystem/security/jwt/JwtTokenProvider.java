@@ -20,7 +20,7 @@ import java.util.List;
 
 @Component
 public class JwtTokenProvider {
-    public static final int START_INDEX_OF_TOKEN = 7;
+    private static final int START_INDEX_OF_TOKEN = 7;
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey;
     @Value("${security.jwt.token.expire-length:3600000}")

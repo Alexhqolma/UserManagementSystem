@@ -29,9 +29,6 @@ public class InjectController {
         roleService.save(new Role(Role.RoleName.ADMIN));
         roleService.save(new Role(Role.RoleName.USER));
         List<Role> roles = roleService.findAll();
-        Role role = roleService.findByRole(Role.RoleName.USER);
-        Set<Role> roleUser = new HashSet<>();
-        roleUser.add(role);
 
         UserAccount testAdmin = new UserAccount();
         testAdmin.setUserName("a");

@@ -1,19 +1,19 @@
 <header th:insert="main/header :: header"></header>
 <div th:each="edi : ${user}">
 <h1>Edit user (<span th:text="${edi.userName}" />)</h1>
-  <form th:action = "@{/user/} + ${edi.id} + @{/edit}" method="post">
-    User Name: <input type="text" name="userName" th:value="${edi.userName}" />
+  <form th:action = "@{/user/} + ${edi.id} + @{/edit}" th:method="post" th:object="${userAccount}">
+    User Name: <input type="text" th:field="*{userName}" />
     <div style="border-bottom: black solid 1px;margin: 5px 0px;"></div>
-    User Password: <input type="text" name="userPassword" th:value="${edi.password}" />
+    User Password: <input type="text" th:field="*{password}" />
     <div style="border-bottom: black solid 1px;margin: 5px 0px;"></div>
-    First Name: <input type="text" name="firstName" th:value="${edi.firstName}" />
+    First Name: <input type="text" th:field="*{firstName}" />
     <div style="border-bottom: black solid 1px;margin: 5px 0px;"></div>
-    Last Name: <input type="text" name="lastName" th:value="${edi.lastName}" />
+    Last Name: <input type="text" th:field="*{lastName}" />
     <div style="border-bottom: black solid 1px;margin: 5px 0px;"></div>
     Status:
     <select name="status">
-      <option value="0">Active</option>
-      <option value="1">Inactive</option>
+      <option value="ACTIVE">Active</option>
+      <option value="INACTIVE">Inactive</option>
     </select>
     <div style="border-bottom: black solid 1px;margin: 5px 0px;"></div>
     <input type="hidden" th:value="${edi.id}" />
