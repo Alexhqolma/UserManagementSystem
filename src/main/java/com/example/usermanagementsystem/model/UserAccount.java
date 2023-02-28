@@ -22,16 +22,16 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(min = 3, max = 16, message = "Name should be between 3 and 16 characters")
-    @Latin
+    //@Latin
     private String userName;
     @Size(min = 3, max = 16)
-    @LatinWithDigits
+    //@LatinWithDigits
     private String password;
     @Size(min = 1, max = 16)
-    @Latin
+    //@Latin
     private String firstName;
     @Size(min = 1, max = 16)
-    @Latin
+    //@Latin
     private String lastName;
     @ManyToMany
     private Set<Role> roles;

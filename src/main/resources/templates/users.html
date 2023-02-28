@@ -5,7 +5,7 @@
     <div> User Name: <span th:text="${row.userName}" /></div>
     <div> First Name: <span th:text="${row.firstName}" /></div>
     <div> Last Name: <span th:text="${row.lastName}" /></div>
-    <div> Last Name: <span th:text="${row.status}" /></div>
+    <div> Status: <span th:text="${row.status}" /></div>
     <div> Date of creation: <span th:text="${row.createdAt}" /></div>
     <div> Review: <a th:href="@{/user/} + ${row.id}">Details</a></div>
     <div> Edit User: <a th:href="@{/user/} + ${row.id} + @{/edit/}">Edit</a></div>

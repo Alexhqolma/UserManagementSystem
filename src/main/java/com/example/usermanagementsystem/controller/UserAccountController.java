@@ -64,7 +64,7 @@ public class UserAccountController {
     }
 
     @PostMapping("/new")
-    public ModelAndView addUser(@ModelAttribute("userAccount") @Valid UserAccount userAccount,
+    public ModelAndView addUser(@Valid @ModelAttribute("userAccount") UserAccount userAccount,
                                 BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addNewUser");
